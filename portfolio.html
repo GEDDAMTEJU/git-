@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saiteja Geddam — Software Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --ink: #0B1120;
+            --ink-2: #101a30;
+            --panel: #0f182c;
+            --line: #22304d;
+            --paper: #F5F3EE;
+            --slate: #8792a6;
+            --teal: #1FB6FF;
+            --amber: #E8A33D;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--ink);
+            color: var(--paper);
+            font-family: 'IBM Plex Sans', sans-serif;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection {
+            background: var(--teal);
+            color: #04140d;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .wrap {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        .mono {
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        /* ---------- NAV ---------- */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(11, 17, 32, 0.85);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .navrow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+        }
+
+        .brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            letter-spacing: 0.02em;
+        }
+
+        .brand .dot {
+            color: var(--teal);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 28px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            color: var(--slate);
+            transition: color .15s ease;
+        }
+
+        nav a:hover {
+            color: var(--teal);
+        }
+
+        nav a::before {
+            content: "./";
+            color: var(--line);
+        }
+
+        /* ---------- TERMINAL STATUS BAR ---------- */
+        .statusbar {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 7px 14px;
+            border: 1px solid var(--line);
+            border-radius: 99px;
+            background: var(--panel);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12.5px;
+            color: var(--teal);
+        }
+
+        .statusbar .pulse {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--teal);
+            box-shadow: 0 0 0 0 rgba(61, 220, 151, .6);
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(61, 220, 151, .55);
+            }
+
+            70% {
+                box-shadow: 0 0 0 8px rgba(61, 220, 151, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(61, 220, 151, 0);
+            }
+        }
+
+        /* ---------- HERO ---------- */
+        .hero {
+            padding: 96px 0 72px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .hero .cmdline {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            color: var(--slate);
+            margin-bottom: 22px;
+        }
+
+        .hero .cmdline .prompt {
+            color: var(--teal);
+        }
+
+        h1.title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: clamp(40px, 6vw, 68px);
+            color: #1FB6FF line-height: 1.04;
+            margin: 0 0 18px;
+            letter-spacing: -0.01em;
+        }
+
+        h1.title .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 0.85em;
+            background: var(--amber);
+            margin-left: 6px;
+            animation: blink 1s step-end infinite;
+            vertical-align: -2px;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .hero p.lede {
+            font-size: 18px;
+            color: #c7cede;
+            max-width: 600px;
+            margin: 0 0 32px;
+        }
+
+        .hero p.lede b {
+            color: var(--paper);
+            font-weight: 600;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 36px;
+        }
+
+        .tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12.5px;
+            color: var(--slate);
+            border: 1px solid var(--line);
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+
+        .cta-row {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13.5px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--teal);
+            color: #04140d;
+            font-weight: 600;
+            border: 1px solid var(--teal);
+            transition: transform .15s ease, box-shadow .15s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -8px rgba(61, 220, 151, .5);
+        }
+
+        .btn-ghost {
+            border: 1px solid var(--line);
+            color: var(--paper);
+            transition: border-color .15s ease, color .15s ease;
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--teal);
+            color: var(--teal);
+        }
+
+        /* ---------- SECTION SHELL ---------- */
+        section {
+            padding: 64px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-head {
+            display: flex;
+            align-items: baseline;
+            gap: 14px;
+            margin-bottom: 34px;
+        }
+
+        .section-head .idx {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            color: var(--line);
+        }
+
+        .section-head h2 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: var(--teal);
+            margin: 0;
+        }
+
+        .section-head h2::before {
+            content: "$ ";
+            color: var(--amber);
+        }
+
+        .section-head .rule {
+            flex: 1;
+            height: 1px;
+            background: var(--line);
+        }
+
+        /* ---------- ABOUT ---------- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 48px;
+        }
+
+        .about-grid p {
+            color: #c7cede;
+            font-size: 15.5px;
+        }
+
+        .about-grid p+p {
+            margin-top: 14px;
+        }
+
+        .infobox {
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: var(--panel);
+            padding: 20px 22px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+        }
+
+        .infobox dl {
+            margin: 0;
+        }
+
+        .infobox .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 9px 0;
+            border-bottom: 1px dashed var(--line);
+            gap: 12px;
+        }
+
+        .infobox .row:last-child {
+            border-bottom: none;
+        }
+
+        .infobox .k {
+            color: var(--slate);
+        }
+
+        .infobox .v {
+            color: var(--paper);
+            text-align: right;
+        }
+
+        .infobox .v.open {
+            color: var(--teal);
+            font-weight: 600;
+        }
+
+        /* ---------- SKILLS ---------- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 16px;
+        }
+
+        .skillcard {
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 20px;
+            background: linear-gradient(180deg, var(--panel), var(--ink-2));
+        }
+
+        .skillcard .label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11.5px;
+            color: var(--amber);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 10px;
+        }
+
+        .skillcard ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skillcard li {
+            font-size: 13.5px;
+            color: #d7dce8;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--line);
+            padding: 5px 10px;
+            border-radius: 6px;
+        }
+
+        /* ---------- EDUCATION ---------- */
+        .edu-card {
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 26px 28px;
+            background: var(--panel);
+            display: flex;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .edu-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 19px;
+            margin: 0 0 6px;
+        }
+
+        .edu-card .meta {
+            color: var(--slate);
+            font-size: 14px;
+        }
+
+        .edu-card .when {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            color: var(--teal);
+            white-space: nowrap;
+            align-self: flex-start;
+        }
+
+        /* ---------- PROJECTS (placeholder / build log) ---------- */
+        .buildlog {
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: #0a1120;
+            padding: 24px 26px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            color: #93a0b8;
+        }
+
+        .buildlog .line {
+            margin-bottom: 8px;
+        }
+
+        .buildlog .ok {
+            color: var(--teal);
+        }
+
+        .buildlog .warn {
+            color: var(--amber);
+        }
+
+        .buildlog .muted {
+            color: #586683;
+        }
+
+        /* ---------- CONTACT ---------- */
+        .contact-card {
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 40px;
+            background: radial-gradient(circle at 20% 20%, rgba(61, 220, 151, 0.08), transparent 60%), var(--panel);
+            text-align: center;
+        }
+
+        .contact-card h2.big {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(26px, 4vw, 36px);
+            margin: 0 0 14px;
+        }
+
+        .contact-card p {
+            color: #c7cede;
+            max-width: 480px;
+            margin: 0 auto 28px;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        footer {
+            padding: 28px 0 48px;
+            text-align: center;
+            color: var(--slate);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+        }
+
+        @media (max-width:720px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 16px;
+            }
+
+            .hero {
+                padding: 72px 0 56px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="wrap navrow">
+            <h5>
+                <div WELCOME TO MY PORTFOLIO></div>
+            </h5>
+            <div class="brand">saiteja<span class="dot">.</span>geddam</div>
+            <nav>
+                <ul>
+                    <li><a href="#about">about</a></li>
+                    <li><a href="#skills">skills</a></li>
+                    <li><a href="#education">education</a></li>
+                    <li><a href="#contact">contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="wrap">
+            <div class="cmdline"><span class="prompt">Sai Teja Geddam</span> CSE Student</div>
+            <div class="statusbar" style="margin-bottom:26px;">
+                <span class="pulse"></span> STATUS: open to work
+            </div>
+            <h1 class="title"> Wellcome to my portfolio <br> Saiteja Geddam<span class="cursor"></span></h1>
+            <p class="lede">
+                <b>Computer Science Engineering graduate</b> from Bhimavaram, Andhra Pradesh —
+                building clean, functional software with Python and the web, and
+                still sharpening my edge one problem at a time.
+            </p>
+            <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">Front-End Development</span>
+                <span class="tag">SQL</span>
+                <span class="tag">Git &amp; GitHub</span>
+                <span class="tag">Problem Solving</span>
+            </div>
+            <div class="cta-row">
+                <a class="btn btn-primary" href="mailto:geddamsai2000@gmail.com">→ say hello</a>
+                <a class="btn btn-ghost" href="https://www.linkedin.com/in/saitejageddam9010752753" target="_blank"
+                    rel="noopener">view LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="wrap">
+            <div class="section-head">
+                <span class="idx">01</span>
+                <h2> about me</h2>
+                <span class="rule"></span>
+            </div>
+            <div class="about-grid">
+                <div>
+                    <p>
+                        I'm a Computer Science Engineering graduate with a hands-on foundation
+                        in Python, front-end development, SQL, and version control. I like taking
+                        a problem apart, understanding what it's really asking, and building a
+                        solution that's simple to read and easy to maintain.
+                    </p>
+                    <p>
+                        Right now I'm actively looking for opportunities as a Software Engineer —
+                        roles where I can keep learning fast, ship real features, and grow
+                        alongside a good engineering team.
+                    </p>
+                </div>
+                <div class="infobox">
+                    <dl>
+                        <div class="row"><span class="k">Location</span><span class="v">Bhimavaram, AP, India</span>
+                        </div>
+                        <div class="row"><span class="k">Focus</span><span class="v">Python · Front-End · SQL</span>
+                        </div>
+                        <div class="row"><span class="k">Education</span><span class="v">B.Tech CSE, JNTUK</span></div>
+                        <div class="row"><span class="k">Grad. Year</span><span class="v">2025</span></div>
+                        <div class="row"><span class="k">Availability</span><span class="v open">Open to work</span>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="wrap">
+            <div class="section-head">
+                <span class="idx">02</span>
+                <h2>skills/</h2>
+                <span class="rule"></span>
+            </div>
+            <div class="skills-grid">
+                <div class="skillcard">
+                    <div class="label">Languages</div>
+                    <ul>
+                        <li>Python</li>
+                        <li>SQL</li>
+                        <li>HTML/CSS</li>
+                        <li>JavaScript</li>
+                    </ul>
+                </div>
+                <div class="skillcard">
+                    <div class="label">Development</div>
+                    <ul>
+                        <li>Front-End Dev</li>
+                        <li>Git</li>
+                        <li>GitHub</li>
+                    </ul>
+                </div>
+                <div class="skillcard">
+                    <div class="label">Core Strengths</div>
+                    <ul>
+                        <li>Problem Solving</li>
+                        <li>Debugging</li>
+                        <li>Clean Code</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="wrap">
+            <div class="section-head">
+                <span class="idx">03</span>
+                <h2> education</h2>
+                <span class="rule"></span>
+            </div>
+            <div class="edu-card">
+                <div>
+                    <h3>Jawaharlal Nehru Technological University Kakinada (JNTUK)</h3>
+                    <h4>DNR College Of Engineering And Technology (NAAC A++)</h4>
+                    <div class="meta">Bachelor of Technology · Computer Software Engineering</div>
+                </div>
+                <div class="when"> 2021 — 2025</div>
+                <div>
+                    <h3>Aditya Junior College (Intermediate)</h3>
+                    <div class="meta">Maths Physics Chemistry(MPC)</div>
+                </div>
+                <div class="when">2019 — 2021</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="wrap">
+            <div class="section-head">
+                <span class="idx">04</span>
+                <h2>run build --projects</h2>
+                <span class="rule"></span>
+            </div>
+            <div class="buildlog">
+                <div class="line ok">project in college/Utilising Deep Learning Techniques To Identify And Diagnose
+                    Brain Tumors On MRI Images </div>
+                <div class="line ok"> project/ Login Page</div>
+                <div class="line ok"> project/Front End Ecommerce</div>
+                <div class="line ok"> project/ Portfolio Website</div>
+                <div>All this projects have you see in my github profile</div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="wrap">
+            <div class="contact-card">
+                <h2 class="big">Let's build something.</h2>
+                <p>Open to Software Engineer, Python, and Front-End Developer roles.
+                    Reach out — I reply quickly.</p>
+                <div class="contact-links">
+                    <a class="btn btn-primary" href="mailto:geddamsai2000@gmail.com">geddamsai2000@gmail.com</a>
+                    <a class="btn btn-ghost" href="https://www.linkedin.com/in/saitejageddam9010752753" target="_blank"
+                        rel="noopener">LinkedIn ↗</a>
+                    <a class="btn btn-ghost" href="https://github.com/GEDDAMTEJU" target="_blank" rel="noopener">GitHub
+                        ↗</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        2026 Saiteja Geddam — built with intent, one commit at a time.
+    </footer>
+
+</body>
+
+</html>
